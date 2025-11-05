@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Comentarios</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .comment { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Sistema de Comentarios</h1>
+    <div id="comments"></div>
+    <h2>Agregar Comentario</h2>
+    <input type="text" id="author" placeholder="Autor">
+    <textarea id="text" placeholder="Comentario"></textarea>
+    <button onclick="addComment()">Enviar</button>
+    <script>
+        const API_URL = window.location.protocol + '//' + window.location.hostname.replace('frontend', 'backend-api');
+        
+        async function loadComments() {
+            const res = await fetch(`${API_URL}/api/comments`);
+            const data = await res.json();
+            document.getElementById('comments').innerHTML = data.map(c => 
+                `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`
+            ).join('');
+        }
+        
+        async function addComment() {
+            const author = document.getElementById('author').value;
+            const text = document.getElementById('text').value;
+            await fetch(`${API_URL}/api/comments`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({author, text})
+            });
+            document.getElementById('author').value = '';
+            document.getElementById('text').value = '';
+            loadComments();
+        }
+        
+        loadComments();
+    </script>
+</body>
+</html>
