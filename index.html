@@ -19,7 +19,7 @@
     <textarea id="text" placeholder="Comentario"></textarea>
     <button onclick="addComment()">Enviar</button>
     <script>
-        const API_URL = window.location.protocol + '//' + window.location.hostname.replace('frontend', 'backend-api');
+        const API_URL = 'https://' + window.location.hostname.replace('frontend', 'backend-api');
         
         async function loadComments() {
             const res = await fetch(`${API_URL}/api/comments`);
