@@ -18,7 +18,7 @@ resources:
 service:
   enabled: true
   port: 80
-  targetPort: 80
+  targetPort: 8080
 
 route:
   enabled: true
