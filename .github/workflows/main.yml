@@ -65,4 +65,4 @@ jobs:
 
       - name: Deploy Frontend
         run: |
-          helm upgrade --install frontend oci://registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/comments-chart --version 15 --values values.yaml
+          helm upgrade --install frontend oci://registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/comments-chart --version 18 --values values.yaml
