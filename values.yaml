@@ -24,8 +24,9 @@ route:
   enabled: true
   host: ""
 
-hpa:
-  enabled: false
+env:
+  - name: BACKEND_API_URL
+    value: "http://backend-api:3000"
 
 statefulset:
   enabled: false
